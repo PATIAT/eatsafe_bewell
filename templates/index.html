@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Eat Safe-Be Well</title>
+    <title>Eat Safe - Be Well</title>
     <link rel="icon" type="image/x-icon" href="">
     <meta name="description" content="Eat Safe-Be Well is your go to place to report any food safety and quality issues you may experience">
     <meta name="keywords" content="food safety quality consumers brands fast food eat out takeaway restaurant supermarket convenience store food authenticity food integrity">
@@ -21,6 +21,37 @@
 </head>
 
 <body>
+
+    <header>
+        <!-- Main navigation -->
+        <nav class="nav-extended text-shadow blue-grey darken-1">
+            <div class="nav-wrapper">
+              <a href="{{ url_for('get_reports') }}" class="brand-logo">EAT SAFE - BE WELL</a>
+              <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
+              <ul class="right hide-on-med-and-down">
+                <li><a href="{{ url_for('get_reports') }}">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">New Report</a></li>
+                <li><a href="#">Manage Categories</a></li>
+                <li><a href="#">Log Out</a></li>
+                <li><a href="#">Log In</a></li>
+                <li><a href="#">Register</a></li>
+              </ul>
+            </div>
+          </nav>
+          
+          <!-- Mobile collapsible navigation -->
+          <ul class="sidenav" id="mobile-demo">
+            <li><h4 class="center-align">ESBW</h4></li>
+            <li><a href="{{ url_for('get_reports') }}">Home</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">New Report</a></li>
+            <li><a href="#">Manage Categories</a></li>
+            <li><a href="#">Log Out</a></li>
+            <li><a href="#">Log In</a></li>
+            <li><a href="#">Register</a></li>
+          </ul>
+    </header>
     {% block content %}
 
     {% endblock %}
