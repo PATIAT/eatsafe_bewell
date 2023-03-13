@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eat Safe - Be Well</title>
+  <link rel="icon" type="image/x-icon" href="">
+  <meta name="description"
+    content="Eat Safe-Be Well is your go to place to report any food safety and quality issues you may experience">
+  <meta name="keywords"
+    content="food safety quality consumers brands fast food eat out takeaway restaurant supermarket convenience store food authenticity food integrity">
+  <meta name="author" content="Eat Safe-Be Well">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    type="text/css">
+  <!-- Fontawesome -->
+  <script src="https://kit.fontawesome.com/12ef280c55.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+  {% block styles %}
+  {% endblock %}
+</head>
+
+<body>
+
+  <header>
+    <!-- Main navigation - sourced from Materialize CSS-->
+    <nav class="nav-extended">
+      <div class="container">
+        <div class="nav-wrapper">
+          <a href="{{ url_for('get_reports') }}" class="brand-logo">Eat safe, be
+            well</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="{{ url_for('get_reports') }}">Home</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">New Report</a></li>
+            <li><a href="#">Manage Categories</a></li>
+            <li><a href="#">Log Out</a></li>
+            <li><a href="#">Log In</a></li>
+            <li><a href="#">Register</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile collapsible navigation - sourced from Materialize CSS -->
+    <ul class="sidenav" id="mobile-demo">
+      <li>
+        <h4 id="side-logo" class="center-align brand-logo"><i class="fa-solid fa-utensils"></i></i> ESBW</h4>
+      </li>
+      <li><a href="{{ url_for('get_reports') }}">Home</a></li>
+      <li><a href="#">Profile</a></li>
+      <li><a href="#">New Report</a></li>
+      <li><a href="#">Manage Categories</a></li>
+      <li><a href="#">Log Out</a></li>
+      <li><a href="#">Log In</a></li>
+      <li><a href="#">Register</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <div class="container">
+      {% block content %} {% endblock %}
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="footer-title"><i class="fa-solid fa-utensils"></i></i> Eat safe, be well...</h5>
+          <p>Report and document your food safety incidents - protect others today!</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <div class="social-links">
+            <a target="_blank" href="https://www.facebook.com">
+              <i class="fa-brands fa-facebook-square" aria-hidden="true"></i>
+              <span class="sr-only">Facebook</span>
+            </a>
+            <a target="_blank" href="https://twitter.com">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+              <span class="sr-only">Twitter</span>
+            </a>
+            <a target="_blank" href="https://www.instagram.com">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+              <span class="sr-only">Instagram</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+  {% block scripts %}
+  {% endblock %}
+
+</body>
+
+</html>
