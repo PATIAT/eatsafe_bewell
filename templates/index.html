@@ -10,12 +10,28 @@
     <meta name="description" content="Eat Safe-Be Well is your go to place to report any food safety and quality issues you may experience">
     <meta name="keywords" content="food safety quality consumers brands fast food eat out takeaway restaurant supermarket convenience store food authenticity food integrity">
     <meta name="author" content="Eat Safe-Be Well">
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" 
+    integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" text="text/css">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    {% block styles %}
+    {% endblock %}
 </head>
 
 <body>
     {% block content %}
 
     {% endblock %}
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>   
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> 
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% block scripts %}
+{% endblock %}
 </body>
 
 </html>
