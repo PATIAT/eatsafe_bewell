@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eat Safe - Be Well</title>
+</head>
+<body>
+    {% for report in reports %}
+        {{ report.category_name }}<br>
+        {{ report.report_name }}<br>
+        {{ report.report_product }}<br>
+        {{ report.report_brand }}<br>
+        {{ report.report_bbd }}<br>
+        {{ report.report_symptoms }}<br>
+        {{ report.report_fbo }}<br>
+        {{ report.is_serious }}<br>
+        {{ report.report_date }}<br>
+    {% endfor %}
+    
+</body>
+</html>
