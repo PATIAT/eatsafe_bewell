@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- page title to explain what users can expect from page -->
+<div class="container">
+    <h3 class="page-title center-align">Register Today</h3>
+</div>
+
+<!-- card panel, input and buttons sourced from Materialize CSS -->
+<div class="row">
+    <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
+        <div class="card-panel">
+            <!-- username field -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="username" name="username" type="text" minlength="5" maxlength="15"
+                        pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
+                    <label for="username">Username</label>
+                </div>
+            </div>
+            <!-- first and last name fields -->
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="fname" name="fname" type="text" class="validate" required>
+                    <label for="fname">First Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="lname" name="lname" type="text" class="validate" required>
+                    <label for="lname">Last Name</label>
+                </div>
+            </div>
+            <!-- county field -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="county" name="county" type="text" class="validate" required>
+                    <label for="county">County</label>
+                </div>
+            </div>
+            <!-- password field -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="password" name="password" type="password" minlength="5" maxlength="15"
+                        pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <!-- submit button -->
+            <div class="row">
+                <button type="submit" class="col s12 m6 offset-m3 btn-large">
+                    Register Today <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+{% endblock %}
