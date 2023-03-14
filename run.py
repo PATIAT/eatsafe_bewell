@@ -28,7 +28,7 @@ to the user upon visiting the site.
 @app.route("/")
 @app.route("/get_reports")
 def get_reports():
-    reports = mongo.db.reports.find()
+    reports = list(mongo.db.reports.find())
     return render_template("reports.html", reports=reports)
 
 
@@ -130,7 +130,27 @@ def dashboard(username):
     # retrieving the session user username from the database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    return render_template("dashboard.html", username=username)
+
+    if session["user"]:
+        return render_template("dashboard.html", username=username)
+
+    return redirect(url_for("login"))
+
+
+"""
+The logout() function removes the session user's cookie and provides
+the user with a flash message before redirecting them to the login
+screen again.
+
+"""
+
+
+@app.route("/logout")
+def logout():
+    # removing the user from session cookies and logging user out
+    flash("You have successfully logged out")
+    session.pop("user")
+    return redirect(url_for("login"))
 
 
 if __name__ == "__main__":

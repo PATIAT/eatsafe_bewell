@@ -1,16 +1,100 @@
 {% extends "base.html" %}
 {% block content %}
 
+<!-- page title to explain what users can expect from page -->
+<div class="container">
+    <h3 class="page-title center-align">Eat safe, be well reports</h3>
+</div>
+
+<!-- JUMBOTRON TO GO HERE -->
+
+<div class="row">
     {% for report in reports %}
-        {{ report.category_name }}<br>
-        {{ report.report_name }}<br>
-        {{ report.report_product }}<br>
-        {{ report.report_brand }}<br>
-        {{ report.report_bbd }}<br>
-        {{ report.report_symptoms }}<br>
-        {{ report.report_fbo }}<br>
-        {{ report.is_serious }}<br>
-        {{ report.report_date }}<br>
+    <!-- card -->
+    <div class="col s12 m6 l4">
+        <div class="card medium hoverable">
+            <!-- <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src="#">
+            </div> -->
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">
+                    <strong>Issue: </strong>{{ report.report_name }}
+                    <i class="fas fa-caret-down right"></i>
+                </span>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Best before date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ report.report_product }}</td>
+                            <td>{{ report.report_bbd }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <div>
+                    <p><strong>Brand:</strong></p>
+                    <p>{{ report.report_brand }}</p>
+                </div>
+                <br>
+                <div>
+                    <p><strong>Symptoms reported:</strong></p>
+                    <p>{{ report.report_symptoms }}</p>
+                </div>
+                <br>
+                <div>
+                    <span class="card-title activator grey-text text-darken-4">
+                        <p><i class="fa-regular fa-calendar"></i> {{ report.report_date }}</p>
+                    </span>
+                </div>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">
+                    <strong>Issue: </strong>{{ report.report_name }}
+                    <i class="fas fa-times-circle right"></i>
+                </span>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Serious condition</th>
+                            <th>Reported to business</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% if report.is_serious == "on" %}
+                            <td><i class="fa-solid fa-check tooltipped"
+                                data-position="right" data-tooltip="This is serious"></i></td>
+                            {% else %}
+                            <td><i class="fa-solid fa-x tooltipped"
+                                data-position="right" data-tooltip="This is not serious"></i></td>
+                            {% endif %}
+                            {% if report.report_fbo == "on" %}
+                            <td><i class="fa-solid fa-check tooltipped"
+                                data-position="right" data-tooltip="Reported to brand"></i></td>
+                            {% else %}
+                            <td><i class="fa-solid fa-x tooltipped"
+                                data-position="right" data-tooltip="Not reported to brand">></i></td>
+                            {% endif %}
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <div>
+                    <span class="card-title grey-text text-darken-4">
+                        <strong>Category: </strong>{{ report.category_name }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endfor %}
+</div>
 
 {% endblock %}
