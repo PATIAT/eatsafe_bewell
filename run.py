@@ -4,6 +4,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+
 if os.path.exists("env.py"):
     import env
 
@@ -19,8 +20,8 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 """
-get_reports() method used to display the reports template to the user upon
-visiting the site.
+The get_reports() function is used to display the reports summary template
+to the user upon visiting the site.
 """
 
 
@@ -32,8 +33,9 @@ def get_reports():
 
 
 """
-register() method used to display the register template to the site and to
-gather the user input data from the register form and post it to the database.
+The register() function is used to display the register template to the site
+and to gather the user input data from the registration form and post it to
+the database.
 """
 
 
@@ -43,26 +45,92 @@ def register():
         # checking whether the user name from form already exists
         # in the database
         existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+            {"username": request.form.get("username").lower()}
+        )
 
         if existing_user:
             flash("This username already exists, please try again!")
-            return redirect(url_for('register'))
+            return redirect(url_for("register"))
 
         register = {
             "username": request.form.get("username").lower(),
             "fname": request.form.get("fname").lower(),
             "lname": request.form.get("lname").lower(),
             "county": request.form.get("county").lower(),
-            "password": generate_password_hash(request.form.get("password"))
+            "password": generate_password_hash(request.form.get("password")),
         }
         mongo.db.users.insert_one(register)
 
         # putting the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
         flash("Your registration has been successful!")
+        return redirect(url_for("dashboard", username=session["user"]))
 
     return render_template("register.html")
+
+
+"""
+The login() function renders the html template using GET method and POST
+checks to see if the database has the username. If so, the password given
+by the user is checked to ensure it matches with the werkzeug hashed
+password. If the password doesn't match or if the username doesn't match
+or exist, the user is presented with flash messages to inform them and are
+redirected to the same login page.
+"""
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        # checking if the username from the user matches any
+        # database records
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()}
+        )
+
+        if existing_user:
+            # checking if the hashed password from the user matches
+            # any database records
+            if check_password_hash(
+                existing_user["password"], request.form.get("password")
+            ):
+
+                session["user"] = request.form.get("username").lower()
+                flash(
+                    "Welcome to Eat safe, be well, {}".format(
+                        request.form.get("username")
+                    )
+                )
+                return redirect(url_for("dashboard", username=session["user"]))
+
+            else:
+                # message to user to let them know the username and/or
+                # password provided is incorrect
+                flash("Incorrect Username and/or Password")
+                return redirect(url_for("login"))
+
+        else:
+            # message to user to let them know the username and/or
+            # password provided is incorrect
+            flash("Incorrect Username and/or Password")
+            return redirect(url_for("login"))
+
+    return render_template("login.html")
+
+
+"""
+The dashboard() function gets the session user's username from
+the database and redirects the user to their own dashboard.
+
+"""
+
+
+@app.route("/dashboard/<username>", methods=["GET", "POST"])
+def dashboard(username):
+    # retrieving the session user username from the database
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    return render_template("dashboard.html", username=username)
 
 
 if __name__ == "__main__":

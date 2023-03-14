@@ -28,6 +28,19 @@ main {
     color: #A6653F;
 }
 
+.helper {
+    font-size: 16px;
+}
+
+.hyperlink {
+    font-size: 16px;
+    color: #778C2A;
+}
+
+.hyperlink:hover {
+    color: #A6653F;
+}
+
 /* ========== 
 Header & Navigation Styles 
 ========== */

@@ -3,12 +3,12 @@
 
 <!-- page title to explain what users can expect from page -->
 <div class="container">
-    <h3 class="page-title center-align">Register Today</h3>
+    <h3 class="page-title center-align">Login</h3>
 </div>
 
 <!-- card panel, input and buttons sourced from Materialize CSS -->
 <div class="row">
-    <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
+    <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('login') }}">
         <div class="card-panel">
             <!-- username field -->
             <div class="row">
@@ -16,24 +16,6 @@
                     <input id="username" name="username" type="text" minlength="5" maxlength="15"
                         pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
                     <label for="username">Username</label>
-                </div>
-            </div>
-            <!-- first and last name fields -->
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="fname" name="fname" type="text" class="validate" required>
-                    <label for="fname">First Name</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="lname" name="lname" type="text" class="validate" required>
-                    <label for="lname">Last Name</label>
-                </div>
-            </div>
-            <!-- county field -->
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="county" name="county" type="text" class="validate" required>
-                    <label for="county">County</label>
                 </div>
             </div>
             <!-- password field -->
@@ -47,7 +29,7 @@
             <!-- submit button -->
             <div class="row">
                 <button type="submit" class="col s12 m6 offset-m3 btn-large">
-                    Register Today <i class="fas fa-sign-in-alt"></i>
+                    Log In <i class="fas fa-sign-in-alt"></i>
                 </button>
             </div>
 
@@ -55,12 +37,12 @@
     </form>
 </div>
 
-<!-- helper with hyperlink to login page -->
+<!-- helper with hyperlink to register page -->
 <div class="container">
     <div class="row s12">
         <h4 class="helper center-align">
-            Already registered? <a href="{{ url_for('login') }}" class="hyperlink">
-            Log In here.</a>
+            New Here? <a href="{{ url_for('register') }}" class="hyperlink">
+            Register Today</a>
         </h4>
     </div>
 </div>
