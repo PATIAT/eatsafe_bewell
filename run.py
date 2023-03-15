@@ -153,6 +153,19 @@ def logout():
     return redirect(url_for("login"))
 
 
+"""
+The add_report() function renders the add report template and connects
+the database categories to the form select list.
+
+"""
+
+
+@app.route("/add_report")
+def add_report():
+    categories = mongo.db.categories.find().sort("category_name", 1)
+    return render_template("add_report.html", categories=categories)
+
+
 if __name__ == "__main__":
     app.run(
         host=os.environ.get("IP"),

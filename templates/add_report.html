@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- page title to explain what users can expect from page -->
+<div class="container">
+    <h3 class="page-title center-align">Add a new report</h3>
+</div>
+
+<div class="row card-panel">
+    <form class="col s12 m8 offset-m2" method="POST" action="">
+
+            
+            <!-- Report Name -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-pencil-alt prefix"></i>
+                    <input id="report_name" name="report_name" type="text" class="validate" maxlength="50" required>
+                    <label for="report_name">Report Name</label>
+                </div>
+            </div>
+
+            <!-- Report Product -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fa-solid fa-cart-shopping prefix"></i>
+                    <input id="report_product" name="report_product" type="text" class="validate" maxlength="50" required>
+                    <label for="report_product">Product</label>
+                </div>
+            </div>
+
+            <!-- Report Brand -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fa-solid fa-copyright prefix"></i>
+                    <input id="report_brand" name="report_brand" type="text" class="validate" maxlength="50" required>
+                    <label for="report_brand">Brand</label>
+                </div>
+            </div>
+
+            <!-- Best Before Date -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fa-solid fa-calendar prefix"></i>
+                    <input id="report_bbd" name="report_bbd" type="text" class="datepicker validate" required>
+                    <label for="report_bbd">Best Before Date</label>
+                </div>
+            </div>        
+
+            <!-- Category selection -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-folder-open prefix"></i>
+                    <select id="category_name" name="category_name" class="validate" required>
+                        <option value="" disabled selected>Choose Category</option>
+                        {% for category in categories %}
+                            <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="category_name">Report Category</label>
+                </div>
+            </div>
+
+            <!-- Symptoms -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-align-left prefix"></i>
+                    <textarea id="report_symptoms" name="report_symptoms" 
+                    class="materialize-textarea validate" 
+                    minlength="5" maxlength="250"
+                    placeholder="Add your symptoms here..." required></textarea>
+                    <label for="report_symptoms">Symptoms</label>
+                </div>
+            </div>
+
+            <!-- Serious Report -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <div class="switch">
+                        <i class="fa-solid fa-circle-exclamation prefix"></i>
+                        <label for="is_serious">
+                            <input type="checkbox" id="is_serious" name="is_serious">
+                            <span class="lever"></span>
+                            Serious report?
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reported to Store -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <div class="switch">
+                        <i class="fa-solid fa-phone-volume prefix"></i>
+                        <label for="report_fbo">
+                            <input type="checkbox" id="report_fbo" name="report_fbo">
+                            <span class="lever"></span>
+                            Reported to store?
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Date -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fa-solid fa-calendar prefix"></i>
+                    <input id="report_date" name="report_date" type="text" class="datepicker validate" required>
+                    <label for="report_date">Report Date</label>
+                </div>
+            </div> 
+
+            <!-- Submit Button-->
+            <div class="row">
+                <div class="col s12 center-align">
+                    <button id="submit-report" class="btn-large" type="submit">
+                        Submit Report
+                    </button>
+                </div>
+            </div>
+
+    </form>
+</div>
+
+{% endblock %}
