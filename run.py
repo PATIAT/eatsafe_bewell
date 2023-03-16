@@ -191,16 +191,51 @@ def add_report():
 """
 The edit_report() function renders the edit report template to users
 but also find the report id from the database and allows the user to
-edit it
+edit it while displayig the existing data to the user
 """
 
 
 @app.route("/edit_report/<report_id>", methods=["GET", "POST"])
 def edit_report(report_id):
-    report = mongo.db.report.find_one({"_id": ObjectId(report_id)})
+    if request.method == "POST":
+        is_serious = "on" if request.form.get("is_serious") else "off"
+        report_fbo = "on" if request.form.get("report_fbo") else "off"
+        submit = {
+            "report_name": request.form.get("report_name"),
+            "report_product": request.form.get("report_product"),
+            "report_product": request.form.get("report_product"),
+            "report_brand": request.form.get("report_brand"),
+            "report_bbd": request.form.get("report_bbd"),
+            "category_name": request.form.get("category_name"),
+            "report_symptoms": request.form.get("report_symptoms"),
+            "is_serious": is_serious,
+            "report_fbo": report_fbo,
+            "report_date": request.form.get("report_date"),
+            "reported_by": session["user"]
+        }
+        mongo.db.reports.update_one(
+            {"_id": ObjectId(report_id)}, {"$set": submit})
+        flash("Report Successfully Edited")
+
+    report = mongo.db.reports.find_one({"_id": ObjectId(report_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template(
         "edit_report.html", report=report, categories=categories)
+
+
+"""
+The delete_report() function takes task id as a parameter by using the
+object and report id. This is removed by using the delete_one method
+and the user is provided with a flash message and then redirected to the
+get reports page.
+"""
+
+
+@app.route("/delete_report/<report_id>")
+def delete_report(report_id):
+    mongo.db.reports.delete_one({"_id": ObjectId(report_id)})
+    flash("Report Successfully Deleted")
+    return redirect(url_for("get_reports"))
 
 
 if __name__ == "__main__":
