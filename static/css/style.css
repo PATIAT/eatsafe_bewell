@@ -123,6 +123,30 @@ Button Styles
     background-color: #A6653F;
 }
 
+.btn-delete {
+    background-color: #A6653F;
+    color: #ffffff;
+    font-family: 'Alegreya', serif;
+}
+
+.btn-delete:hover {
+    background-color: #778C2A;
+}
+
+.btn-edit {
+    background-color: #778C2A;
+    color: #ffffff;
+    font-family: 'Alegreya', serif;
+}
+
+.btn-edit:hover {
+    background-color: #A6653F;
+}
+
+.btn-container {
+    margin: 5px;
+}
+
 /* ========== 
 Flash Message Styles 
 ========== */
@@ -131,4 +155,35 @@ Flash Message Styles
     line-height: 2;
     color: #778C2A;
     font-family: 'Alegreya', serif;
+}
+
+/* ========== 
+Jumbotron Styles 
+========== */
+
+.jumbotron {
+    height: 300px;
+    background-image: url('../images/reports-page-jumbotron-image.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.jumbatron-overlay {
+    background-color: rgba(255, 255, 255, 0.25);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.jumbatron-content {
+    z-index: 2;
+    text-align: center;
 }
