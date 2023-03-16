@@ -189,8 +189,8 @@ def add_report():
 
 
 """
-The edit_report() function renders the edit report template to users 
-but also find the report id from the database and allows the user to 
+The edit_report() function renders the edit report template to users
+but also find the report id from the database and allows the user to
 edit it
 """
 

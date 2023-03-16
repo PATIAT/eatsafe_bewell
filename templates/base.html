@@ -35,13 +35,13 @@
           <ul class="right hide-on-med-and-down">
             <li><a href="{{ url_for('get_reports') }}">Home</a></li>
             {% if session.user %}
-              <li><a href="{{ url_for('dashboard', username=session['user']) }}">Dashboard</a></li>
-              <li><a href="{{ url_for('add_report') }}">Add Report</a></li>
-              <li><a href="#">Manage Categories</a></li>
-              <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+            <li><a href="{{ url_for('dashboard', username=session['user']) }}">Dashboard</a></li>
+            <li><a href="{{ url_for('add_report') }}">Add Report</a></li>
+            <li><a href="#">Manage Categories</a></li>
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             {% else %}
-              <li><a href="{{ url_for('login') }}">Log In</a></li>
-              <li><a href="{{ url_for('register') }}">Register</a></li>
+            <li><a href="{{ url_for('login') }}">Log In</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
             {% endif %}
           </ul>
         </div>
@@ -55,13 +55,13 @@
       </li>
       <li><a href="{{ url_for('get_reports') }}">Home</a></li>
       {% if session.user %}
-        <li><a href="{{ url_for('dashboard', username=session['user']) }}">Dashboard</a></li>
-        <li><a href="{{ url_for('add_report') }}">Add Report</a></li>
-        <li><a href="#">Manage Categories</a></li>
-        <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+      <li><a href="{{ url_for('dashboard', username=session['user']) }}">Dashboard</a></li>
+      <li><a href="{{ url_for('add_report') }}">Add Report</a></li>
+      <li><a href="#">Manage Categories</a></li>
+      <li><a href="{{ url_for('logout') }}">Log Out</a></li>
       {% else %}
-        <li><a href="{{ url_for('login') }}">Log In</a></li>
-        <li><a href="{{ url_for('register') }}">Register</a></li>
+      <li><a href="{{ url_for('login') }}">Log In</a></li>
+      <li><a href="{{ url_for('register') }}">Register</a></li>
       {% endif %}
     </ul>
   </header>
@@ -80,9 +80,9 @@
   </section>
 
   <main>
-    <div class="container">
-      {% block content %} {% endblock %}
-    </div>
+    <!-- <div class="container"> -->
+    {% block content %} {% endblock %}
+    <!-- </div> -->
   </main>
 
   <!-- page footer sourced from Materialize CSS with custom styles added -->

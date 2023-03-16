@@ -3,12 +3,12 @@
 
 <!-- page title to explain what users can expect from page -->
 <div class="container">
-    <h3 class="page-title center-align">Add a new report</h3>
+    <h3 class="page-title center-align">Edit a report</h3>
 </div>
 
 <div class="container">
     <div class="row card-panel">
-        <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('add_report')}}">
+        <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('edit_report', report_id=report._id)}}">
             <!-- Report Name -->
             <div class="row">
                 <div class="input-field col s12">
@@ -102,13 +102,11 @@
             <div class="row">
                 <div class="col s12 center-align">
                     <button id="submit-report" class="btn-large" type="submit">
-                        Submit Report
+                        Edit Report
                     </button>
                 </div>
             </div>
-
         </form>
     </div>
 </div>
-
 {% endblock %}
