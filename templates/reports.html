@@ -6,95 +6,120 @@
     <h3 class="page-title center-align">Eat safe, be well reports</h3>
 </div>
 
-<!-- JUMBOTRON TO GO HERE -->
+<!-- Jumbotron to show image and links based on if user is logged in -->
+<div class="jumbotron" title="Eat safe, be well">
+    <div class="jumbatron-overlay"></div>
+    <div class="jumbatron-content">
+        <h2 class="page-title-responsive">The No1 place online to report</h2>
+        <h3 class="page-subtitle">unsafe or poor quality food</h3>
+        {% if session.user %}
+            <a href="{{ url_for('get_reports') }}" class="btn-large">Inspect Reports</a>
+        {% else %}
+            <a href="{{ url_for('register') }}" class="btn-large">Register Today</a>
+        {% endif %}
+    </div>
+</div>
 
-<div class="row">
-    {% for report in reports %}
-    <!-- card -->
-    <div class="col s12 m6 l4">
-        <div class="card medium hoverable">
-            <!-- <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="#">
-            </div> -->
-            <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">
-                    <strong>Issue: </strong>{{ report.report_name }}
-                    <i class="fas fa-caret-down right"></i>
-                </span>
-                <br>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Best before date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{ report.report_product }}</td>
-                            <td>{{ report.report_bbd }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br>
-                <div>
-                    <p><strong>Brand:</strong></p>
-                    <p>{{ report.report_brand }}</p>
-                </div>
-                <br>
-                <div>
-                    <p><strong>Symptoms reported:</strong></p>
-                    <p>{{ report.report_symptoms }}</p>
-                </div>
-                <br>
-                <div>
+<br>
+
+<!-- For loop to add instances of reports in the form of card -->
+<div class="container">
+    <div class="row">
+        {% for report in reports %}
+        <!-- card -->
+        <div class="col s12 m6 l4">
+            <div class="card large hoverable">
+                <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">
-                        <p><i class="fa-regular fa-calendar"></i> {{ report.report_date }}</p>
+                        <strong>Issue: </strong>{{ report.report_name }}
+                        <i class="fas fa-caret-down right"></i>
                     </span>
+                    <br>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Best before date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ report.report_product }}</td>
+                                <td>{{ report.report_bbd }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <div>
+                        <p><strong>Brand:</strong></p>
+                        <p>{{ report.report_brand }}</p>
+                    </div>
+                    <br>
+                    <div>
+                        <p><strong>Symptoms reported:</strong></p>
+                        <p>{{ report.report_symptoms }}</p>
+                    </div>
+                    <br>
+                    <div class="col s3 btn-container">
+                        <a href="" class="btn-small btn-delete">DELETE</a>
+                    </div>
+                    <div class="col s3 btn-container">
+                        <a href="{{ url_for('edit_report', report_id=report._id) }}" class="btn-small btn-edit">EDIT</a>
+                    </div>
                 </div>
-            </div>
-            <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">
-                    <strong>Issue: </strong>{{ report.report_name }}
-                    <i class="fas fa-times-circle right"></i>
-                </span>
-                <br>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Serious condition</th>
-                            <th>Reported to business</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            {% if report.is_serious == "on" %}
-                            <td><i class="fa-solid fa-check tooltipped"
-                                data-position="right" data-tooltip="This is serious"></i></td>
-                            {% else %}
-                            <td><i class="fa-solid fa-x tooltipped"
-                                data-position="right" data-tooltip="This is not serious"></i></td>
-                            {% endif %}
-                            {% if report.report_fbo == "on" %}
-                            <td><i class="fa-solid fa-check tooltipped"
-                                data-position="right" data-tooltip="Reported to brand"></i></td>
-                            {% else %}
-                            <td><i class="fa-solid fa-x tooltipped"
-                                data-position="right" data-tooltip="Not reported to brand">></i></td>
-                            {% endif %}
-                        </tr>
-                    </tbody>
-                </table>
-                <br>
-                <div>
+                <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">
-                        <strong>Category: </strong>{{ report.category_name }}
+                        <strong>Issue: </strong>{{ report.report_name }}
+                        <i class="fas fa-times-circle right"></i>
                     </span>
+                    <br>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Serious condition</th>
+                                <th>Reported to business</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {% if report.is_serious == "on" %}
+                                <td><i class="fa-solid fa-check tooltipped" data-position="right"
+                                        data-tooltip="This is serious"></i></td>
+                                {% else %}
+                                <td><i class="fa-solid fa-x tooltipped" data-position="right"
+                                        data-tooltip="This is not serious"></i></td>
+                                {% endif %}
+                                {% if report.report_fbo == "on" %}
+                                <td><i class="fa-solid fa-check tooltipped" data-position="right"
+                                        data-tooltip="Reported to brand"></i></td>
+                                {% else %}
+                                <td><i class="fa-solid fa-x tooltipped" data-position="right"
+                                        data-tooltip="Not reported to brand">></i></td>
+                                {% endif %}
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <div>
+                        <span class="card-title grey-text text-darken-4">
+                            <strong>Category: </strong>{{ report.category_name }}
+                        </span>
+                    </div>
+                    <div>
+                        <span>
+                            <p><i class="fa-regular fa-calendar"></i> Reported on: {{ report.report_date }}</p>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="">
+                            <p>Report added by: <em>{{ report.reported_by }}</em></p>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 
 {% endblock %}
