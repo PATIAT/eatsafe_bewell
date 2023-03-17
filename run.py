@@ -33,6 +33,19 @@ def get_reports():
 
 
 """
+The search() function is used index the database using report_name and
+report_description to match results to the users input.
+"""
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    reports = list(mongo.db.reports.find({"$text": {"$search": query}}))
+    return render_template("reports.html", reports=reports)
+
+
+"""
 The register() function is used to display the register template to the site
 and to gather the user input data from the registration form and post it to
 the database.
