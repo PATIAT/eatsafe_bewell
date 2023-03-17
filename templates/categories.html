@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- page title to explain what users can expect from page -->
+<div class="container">
+    <h3 class="page-title center-align">Manage Categories</h3>
+</div>
+
+<div class="container">
+    <div class="row">
+        {% for category in categories %}
+            <div class="col s12 m4">
+                <div class="card hoverable">
+                    <div class="card-content">
+                        <span class="card-title center-align">{{ category.category_name }}</span>
+                    </div>
+                    <div class="card-action center-align">
+                        <a href="#" class="btn btn-edit">Edit</a>
+                        <a href="#" class="btn btn-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
