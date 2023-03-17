@@ -224,7 +224,7 @@ def edit_report(report_id):
 
 
 """
-The delete_report() function takes task id as a parameter by using the
+The delete_report() function takes report id as a parameter by using the
 object and report id. This is removed by using the delete_one method
 and the user is provided with a flash message and then redirected to the
 get reports page.
@@ -233,9 +233,31 @@ get reports page.
 
 @app.route("/delete_report/<report_id>")
 def delete_report(report_id):
-    mongo.db.reports.delete_one({"_id": ObjectId(report_id)})
-    flash("Report Successfully Deleted")
-    return redirect(url_for("get_reports"))
+    report = mongo.db.reports.find_one({"_id": ObjectId(report_id)})
+    if not report:
+        flash("Report not found")
+        return redirect(url_for("get_reports"))
+    return render_template("confirm_delete.html", report_id=report_id)
+
+
+"""
+The delete_report_confirmed() method confirms whether the method is POST,
+if so, the report is deleted from the database and the user is redirected
+back to the reports page. If the method is not POST (i.e. it's GET or
+something else), we flash an error message and redirect the user back to
+the reports page.
+"""
+
+
+@app.route("/delete_report_confirmed/<report_id>", methods=["GET", "POST"])
+def delete_report_confirmed(report_id):
+    if request.method == "POST":
+        mongo.db.reports.delete_one({"_id": ObjectId(report_id)})
+        flash("Report Successfully Deleted")
+        return redirect(url_for("get_reports"))
+    else:
+        flash("Invalid request method")
+        return redirect(url_for("get_reports"))
 
 
 if __name__ == "__main__":

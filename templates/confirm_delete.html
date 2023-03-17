@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- page title to explain what users can expect from page -->
+<div class="container center-align">
+    <h1 class="page-title">Delete your Eat safe, be well report?</h1>
+    <p>Are you sure you want to delete your report?</p>
+</div>
+
+ <div class="container center-align">
+  <div class="row">
+    <div class="col s12">
+      <form method="post" action="{{ url_for('delete_report_confirmed', report_id=report_id) }}">
+        <button class="btn btn-delete" type="submit">Delete</button>
+        <a class="btn btn-edit" href="{{ url_for('get_reports') }}">Cancel</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
