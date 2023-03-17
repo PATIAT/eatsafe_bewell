@@ -316,6 +316,51 @@ def edit_category(category_id):
     return render_template("edit_category.html", category=category)
 
 
+"""
+The delete_category() function takes category id as a parameter by using the
+object and category id. This is removed by using the remove method
+and the user is provided with a flash message and then redirected to the
+get categories page.
+"""
+
+
+# @app.route("/delete_category/<category_id>")
+# def delete_category(category_id):
+#     mongo.db.categories.find_one({"_id": ObjectId(category_id)})
+#     flash("Category Successfully Deleted")
+#     return redirect(url_for("get_categories"))
+
+
+@app.route("/delete_category/<category_id>")
+def delete_category(category_id):
+    category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
+    if not category:
+        flash("Category not found")
+        return redirect(url_for("get_categories"))
+    return render_template(
+        "confirm_delete_category.html", category_id=category_id)
+
+
+"""
+The delete_category_confirmed() method confirms whether the method is POST,
+if so, the cetegory is deleted from the database and the user is redirected
+back to the categories page. If the method is not POST (i.e. it's GET or
+something else), we flash an error message and redirect the user back to
+the categories page.
+"""
+
+
+@app.route("/delete_category_confirmed/<category_id>", methods=["GET", "POST"])
+def delete_category_confirmed(category_id):
+    if request.method == "POST":
+        mongo.db.categories.delete_one({"_id": ObjectId(category_id)})
+        flash("Category Successfully Deleted")
+        return redirect(url_for("get_categories"))
+    else:
+        flash("Invalid request method")
+        return redirect(url_for("get_categories"))
+
+
 if __name__ == "__main__":
     app.run(
         host=os.environ.get("IP"),
