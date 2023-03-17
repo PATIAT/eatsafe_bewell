@@ -9,6 +9,9 @@ $(document).ready(function () {
   $(".collapsible").collapsible();
   $(".tooltipped").tooltip();
   $("select").formSelect();
+  var flashes = $('.flashes h4');
+  // set a delay of 3 seconds and fade out the flash element
+  flashes.delay(3000).fadeOut();
   $(".datepicker").datepicker({
     format: "dd mmmm, yyyy",
     yearRange: 3,
