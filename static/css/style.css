@@ -28,6 +28,20 @@ main {
     color: #A6653F;
 }
 
+.page-title-responsive {
+    font-size: 44px;
+    font-family: 'Alegreya', serif;
+    font-weight: 400;
+    color: #A6653F;
+}
+
+.page-subtitle {
+    font-family: 'Alegreya', serif;
+    font-weight: 400;
+    color: #A6653F;
+    font-size: 34px;
+}
+
 .helper {
     font-size: 16px;
 }
@@ -127,6 +141,7 @@ Button Styles
     background-color: #A6653F;
     color: #ffffff;
     font-family: 'Alegreya', serif;
+    margin: 5px;
 }
 
 .btn-delete:hover {
@@ -137,14 +152,30 @@ Button Styles
     background-color: #778C2A;
     color: #ffffff;
     font-family: 'Alegreya', serif;
+    margin: 5px;
 }
 
 .btn-edit:hover {
     background-color: #A6653F;
 }
 
-.btn-container {
-    margin: 5px;
+/*Adds space above search buttons to vertically align*/
+@media screen and (min-width: 768px) {
+
+    .search-btns div {
+        padding-top: 30px;
+    }
+
+}
+
+.btn-jumbo {
+    background-color: #778C2A;
+    color: #ffffff;
+    font-family: 'Alegreya', serif;
+}
+
+.btn-jumbo:hover {
+    background-color: #A6653F;
 }
 
 /* ========== 
@@ -153,8 +184,10 @@ Flash Message Styles
 
 .flashes h4 {
     line-height: 2;
-    color: #778C2A;
+    color: #ffffff;
     font-family: 'Alegreya', serif;
+    background-color: #A6653F;
+    border-radius: 5px;
 }
 
 /* ========== 
@@ -173,8 +206,8 @@ Jumbotron Styles
     position: relative;
 }
 
-.jumbatron-overlay {
-    background-color: rgba(255, 255, 255, 0.25);
+.overlay {
+    background-color: rgba(0, 0, 0, 0.25);
     position: absolute;
     top: 0;
     right: 0;
@@ -183,7 +216,7 @@ Jumbotron Styles
     z-index: 1;
 }
 
-.jumbatron-content {
+.jumbotron-content {
     z-index: 2;
     text-align: center;
 }
