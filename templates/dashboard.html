@@ -1,20 +1,132 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!-- page title to explain what users can expect from page -->
-<div class="container">
-    <h3 class="page-title center-align">Your Dashboard</h3>
-</div>
-
-<!-- card panel sourced from Materialize CSS -->
+<!-- Page title to explain what users can expect from page -->
 <div class="container">
     <div class="row">
         <div class="col s12 m8 offset-m2">
-            <div class="card-panel">
-                <h3 class="center-align"></h3>
-                {{ username }}'s Profile
+            <div class="row">
+                <h3 class="center-align page-title">{{ username }}'s Reports</h3>
+                <!-- Submit a new report button-->
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <a href="{{ url_for('add_report') }}" class="btn-large" type="submit">
+                            Submit Report <i class="fa-solid fa-plus icon-padding"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+{% if user_reports|length > 0 %}
+<!-- For loop to add instances of reports in the form of card -->
+<div class="container">
+    <div class="row">
+        {% for report in user_reports %}
+        <!-- card -->
+        <div class="col s12 m6 l4">
+            <div class="card large hoverable">
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">
+                        <strong>Issue: </strong>{{ report.report_name }}
+                        <i class="fas fa-caret-down right"></i>
+                    </span>
+                    <br>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Best before date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ report.report_product }}</td>
+                                <td>{{ report.report_bbd }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <div>
+                        <p><strong>Brand:</strong></p>
+                        <p>{{ report.report_brand }}</p>
+                    </div>
+                    <br>
+                    <div>
+                        <p><strong>Symptoms reported:</strong></p>
+                        <p>{{ report.report_symptoms }}</p>
+                    </div>
+                    <br>
+                    {% if session.user|lower == report.reported_by|lower %}
+                    <div class="row">
+                        <div class="col s12">
+                            <a href="{{ url_for('delete_report', report_id=report._id) }}" class="btn-flat btn-small btn-delete waves-effect waves-light">DELETE</a>
+                            <a href="{{ url_for('edit_report', report_id=report._id) }}" class="btn-flat btn-small btn-edit waves-effect waves-light">EDIT</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">
+                        <strong>Issue: </strong>{{ report.report_name }}
+                        <i class="fas fa-times-circle right"></i>
+                    </span>
+                    <br>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Serious condition</th>
+                                <th>Reported to business</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {% if report.is_serious == "on" %}
+                                <td><i class="fa-solid fa-check tooltipped" data-position="right"
+                                        data-tooltip="This is serious"></i></td>
+                                {% else %}
+                                <td><i class="fa-solid fa-x tooltipped" data-position="right"
+                                        data-tooltip="This is not serious"></i></td>
+                                {% endif %}
+                                {% if report.report_fbo == "on" %}
+                                <td><i class="fa-solid fa-check tooltipped" data-position="right"
+                                        data-tooltip="Reported to brand"></i></td>
+                                {% else %}
+                                <td><i class="fa-solid fa-x tooltipped" data-position="right"
+                                        data-tooltip="Not reported to brand">></i></td>
+                                {% endif %}
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <div>
+                        <span class="card-title grey-text text-darken-4">
+                            <strong>Category: </strong>{{ report.category_name }}
+                        </span>
+                    </div>
+                    <div>
+                        <span>
+                            <p><i class="fa-regular fa-calendar"></i> Reported on: {{ report.report_date }}</p>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="">
+                            <p>Report added by: <em>{{ report.reported_by }}</em></p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<!-- message to be displayed if users search term has no matched from database -->
+<div class="container">
+    <h3 class="page-title center-align">You haven't reported anything yet, add a report today.</h3>
+</div>
+{% endif %}
+
 {% endblock %}
