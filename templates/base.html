@@ -29,8 +29,8 @@
     <nav class="nav-extended">
       <div class="container">
         <div class="nav-wrapper">
-          <a href="{{ url_for('get_reports') }}" class="brand-logo">Eat safe, be
-            well</a>
+          <a href="{{ url_for('get_reports') }}" class="brand-logo">ESBW <i
+              class="fa-solid fa-utensils hide-on-small-only"></i></a>
           <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
           <ul class="right hide-on-med-and-down">
             <li><a href="{{ url_for('get_reports') }}">Home</a></li>
@@ -75,18 +75,19 @@
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
-    <div class="row flashes">
-      <h4 class="center-align">{{ message }}</h4>
+    <div class="container">
+      <div class="row flashes">
+        <h4 class="center-align">{{ message }}</h4>
+      </div>
     </div>
     {% endfor %}
     {% endif %}
     {% endwith %}
   </section>
 
+  <!-- Main content block where other templates are injected into base -->
   <main>
-    <!-- <div class="container"> -->
     {% block content %} {% endblock %}
-    <!-- </div> -->
   </main>
 
   <!-- page footer sourced from Materialize CSS with custom styles added -->
@@ -122,6 +123,7 @@
     integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- Custom script -->
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
   {% block scripts %}
