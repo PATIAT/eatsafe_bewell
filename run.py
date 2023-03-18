@@ -143,9 +143,12 @@ def dashboard(username):
     # retrieving the session user username from the database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
+    user_reports = list(
+        mongo.db.reports.find({"reported_by": session["user"]}))
 
     if session["user"]:
-        return render_template("dashboard.html", username=username)
+        return render_template(
+            "dashboard.html", username=username, user_reports=user_reports)
 
     return redirect(url_for("login"))
 
@@ -337,13 +340,6 @@ get categories page.
 """
 
 
-# @app.route("/delete_category/<category_id>")
-# def delete_category(category_id):
-#     mongo.db.categories.find_one({"_id": ObjectId(category_id)})
-#     flash("Category Successfully Deleted")
-#     return redirect(url_for("get_categories"))
-
-
 @app.route("/delete_category/<category_id>")
 def delete_category(category_id):
     category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
@@ -374,6 +370,7 @@ def delete_category_confirmed(category_id):
         return redirect(url_for("get_categories"))
 
 
+# Run the app
 if __name__ == "__main__":
     app.run(
         host=os.environ.get("IP"),
