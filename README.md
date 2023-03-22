@@ -12,11 +12,11 @@
 
 ## Live Project
 
-[View the live project here.]()
+[View the live project here.](https://eatsafe-bewell.herokuapp.com/get_reports)
 
 ## Repository
 
-[Find the project repository here.]()
+[Find the project repository here.](https://github.com/PATIAT/eatsafe_bewell)
 
 # Table of Contents
 
@@ -112,3 +112,30 @@
 ### Overview
 
 - The website design is professional, yet attractive. The name Eat Safe - Be Well refers to the importance of food safety and food quality. These two food attributes should be a prerequisite for all food that is on sale to consumers. Where this is not found to be the case, a mechanism must exist where consumers can report any such issues, thereby alerting fellow consumers and relevant authorities to potentially unsafe food.
+
+### Colour
+<h2 align="left"><img src="static/readme/images/colour-scheme.jpeg" width="600"></h2>
+
+- Eat Safe – Be Well uses a simple colour scheme of pale greens, browns, beiges and whites. The background is white with the nav and footer background being green which contrast well and keep these elements distinguishable from other elements on the page. 
+
+### Typography
+
+- Brand Logos and Headings are in Alegreya with a serif fallback font. This was used as sparingly as possible to maintain maximum impact. The body is in Roboto which is one of the most popular google fonts with sans-serif as a fallback font. Using Roboto means that the text will be easy to read on all device sizes.
+
+### Images
+
+- Images have been used sparingly on the website as the concept of the website does not necessarily lend itself to images. There is a banner image on the home page which is used to give the user an idea of what the website is about.
+
+Photo by Viktoria Slowikowska: https://www.pexels.com/photo/fresh-vegetables-on-the-table-5677717/
+
+### Icons
+
+- Icons from Fontawesome have been used on the website's forms and on some of the buttons to emphasise the purpose of these elements.
+
+### Materialize CSS Cards
+
+- I decided to use cards as a way to display the user reports as it offers a clean and concise way to display the data submitted by the user. The cards are reveal cards which allow the user to click to reveal more information, this offers a good solution to prevent the cards from becomming cluttered.
+
+# Wireframes
+
+- [View my wireframes in PDF form here](https://github.com/PATIAT/eatsafe_bewell/blob/main/static/readme/wireframes/eat-safe-be-well-wireframes.png).
