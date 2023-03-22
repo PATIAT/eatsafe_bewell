@@ -370,6 +370,22 @@ def delete_category_confirmed(category_id):
         return redirect(url_for("get_categories"))
 
 
+"""
+The page_not_found() method returns a custom 404 error page. It
+registers this view function as the error handler for 404 errors
+using the @app.errorhandler(404) decorator. Inside the page_not_found
+function, the render_template function renders the HTML template.
+It also returns a 404 status code to the browser by passing the second
+argument 404 to the render_template function.
+This function was sourced from Flask documentation.
+"""
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
+
+
 # Run the app
 if __name__ == "__main__":
     app.run(
