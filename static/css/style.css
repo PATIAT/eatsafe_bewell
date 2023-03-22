@@ -11,7 +11,7 @@ General Styles
 body {
     font-family: 'Roboto', sans-serif;
     color: #4f584b;
-    background-color: #ffffff;
+    background-color: rgba(217, 214, 210, 0.35);
     display: flex;
     min-height: 100vh;
     flex-direction: column;
