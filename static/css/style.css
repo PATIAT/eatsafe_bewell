@@ -56,6 +56,14 @@ main {
 }
 
 /* ========== 
+Search Bar Styles
+========== */
+
+#search-query {
+    color: #4f584b;
+}
+
+/* ========== 
 Header & Navigation Styles 
 ========== */
 
@@ -219,4 +227,13 @@ Jumbotron Styles
 .jumbotron-content {
     z-index: 2;
     text-align: center;
+}
+
+
+/* ========== 
+Icon Styles 
+========== */
+
+.why-icon {
+    font-size: 24px;
 }
