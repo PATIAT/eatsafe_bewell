@@ -19,6 +19,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+
 """
 The get_reports() function is used to display the reports summary template
 to the user upon visiting the site.
@@ -383,7 +384,27 @@ This function was sourced from Flask documentation.
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template('404.html'), 404
+    return render_template("404.html"), 404
+
+
+"""
+The about() function simply renders the about page.
+"""
+
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+"""
+The why_report() function simply renders the why report? page.
+"""
+
+
+@app.route("/why_report")
+def why_report():
+    return render_template("why_report.html")
 
 
 # Run the app
