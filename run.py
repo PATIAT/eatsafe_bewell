@@ -21,6 +21,15 @@ mongo = PyMongo(app)
 
 
 """
+The is_admin() function checks whether the user has admin permissions.
+"""
+
+
+def is_admin(username):
+    return username in ["admin"]
+
+
+"""
 The get_reports() function is used to display the reports summary template
 to the user upon visiting the site.
 """
@@ -285,6 +294,10 @@ them to the template for the user to view.
 
 @app.route("/get_categories")
 def get_categories():
+    if "user" not in session or not is_admin(session["user"]):
+        flash("You need to have admin privileges to access this page!")
+        return redirect("get_reports")
+
     categories = list(mongo.db.categories.find().sort("category_name", 1))
     return render_template("categories.html", categories=categories)
 
@@ -294,12 +307,15 @@ The add_category() function renders the add category template and connects
 the database categories to the form select list. If the requested method
 from user input is POST, it executes function and adds the new category to
 the database. If GET, the blank form is displayed.
-
 """
 
 
 @app.route("/add_category", methods=["GET", "POST"])
 def add_category():
+    if "user" not in session or not is_admin(session["user"]):
+        flash("You need to have admin privileges to access this page!")
+        return redirect("get_reports")
+
     if request.method == "POST":
         category = {
             "category_name": request.form.get("category_name")
@@ -320,6 +336,10 @@ edit it while displayig the existing data to the user.
 
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
 def edit_category(category_id):
+    if "user" not in session or not is_admin(session["user"]):
+        flash("You need to have admin privileges to access this page")
+        return redirect("get_reports")
+
     if request.method == "POST":
         submit = {
             "category_name": request.form.get("category_name")
@@ -343,6 +363,11 @@ get categories page.
 
 @app.route("/delete_category/<category_id>")
 def delete_category(category_id):
+
+    if "user" not in session or not is_admin(session["user"]):
+        flash("You need to have admin privileges to access this page")
+        return redirect("get_reports")
+
     category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
     if not category:
         flash("Category not found")
