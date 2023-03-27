@@ -360,8 +360,8 @@
 ## Frameworks Libraries and Programs
 
 - [Heroku](https://id.heroku.com/login)
-  - Heroku is the deployment source I used for this project. I'm also using it for the Postgres relational database
-
+  - Heroku is the deployment source I used for this project.
+  
 - [MongoDB](https://www.mongodb.com/)
     - I'm using MongoDB for my non-relational database.
 
