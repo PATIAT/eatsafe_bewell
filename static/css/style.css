@@ -214,6 +214,30 @@ Jumbotron Styles
     position: relative;
 }
 
+.jumbotron-about {
+    height: 300px;
+    background-image: url('../images/about-page.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.jumbotron-why-report {
+    height: 300px;
+    background-image: url('../images/why-report-page.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
 .overlay {
     background-color: rgba(0, 0, 0, 0.25);
     position: absolute;
@@ -228,7 +252,6 @@ Jumbotron Styles
     z-index: 2;
     text-align: center;
 }
-
 
 /* ========== 
 Icon Styles 
