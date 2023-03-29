@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eat Safe - Be Well</title>
-  <link rel="icon" type="image/x-icon" href="">
+  <link rel="icon" type="image/x-icon" href="/static/images/favicon.png">
   <meta name="description"
     content="Eat Safe-Be Well is your go to place to report any food safety and quality issues you may experience">
   <meta name="keywords"
@@ -55,7 +55,7 @@
     <!-- Mobile collapsible navigation - sourced from Materialize CSS -->
     <ul class="sidenav" id="mobile-demo">
       <li>
-        <h4 id="side-logo" class="center-align brand-logo"><i class="fa-solid fa-utensils"></i></i> ESBW</h4>
+        <h4 id="side-logo" class="center-align brand-logo"><i class="fa-solid fa-utensils"></i> ESBW</h4>
       </li>
       <li><a href="{{ url_for('get_reports') }}">Home</a></li>
       <li><a href="{{ url_for('about') }}">About</a></li>
@@ -74,7 +74,7 @@
     </ul>
   </header>
 
-  <section>
+  <div>
     <!-- flash messages to display to users here-->
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -87,7 +87,7 @@
     {% endfor %}
     {% endif %}
     {% endwith %}
-  </section>
+  </div>
 
   <!-- Main content block where other templates are injected into base -->
   <main>
@@ -99,7 +99,7 @@
     <div class="container">
       <div class="row valign-wrapper">
         <div class="col l6 s12">
-          <h5 class="footer-title"><i class="fa-solid fa-utensils"></i></i> Eat safe, be well...</h5>
+          <h5 class="footer-title"><i class="fa-solid fa-utensils"></i> Eat safe, be well...</h5>
           <p>Report and document your food safety incidents - protect others today!</p>
         </div>
         <div class="col l6 s12">
