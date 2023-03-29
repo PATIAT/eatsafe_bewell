@@ -524,9 +524,7 @@ Mongodb is the database used in the application
 
 - I used Materalize CSS throughout the project, particularly for the nav bar, cards, search bar, buttons and forms. 
 
-- I referred to the lessons from the Code Institute's LMS and used the Task Manager Project for the User Authentication and Search fynctionality.
-
-Code Institute: I referred to lessons and source code from Code Institute's Web Application Development course. I sourced the User Authentication and Search bar functionality from the Task Manager Walk Through Project.
+- I referred to the lessons from the Code Institute's LMS and used the Task Manager Project for the User Authentication and Search functionality.
 
 ## Content
 

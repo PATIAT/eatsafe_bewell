@@ -158,7 +158,8 @@ def dashboard(username):
 
     if session["user"]:
         return render_template(
-            "dashboard.html", username=username, user_reports=user_reports)
+            "dashboard.html", username=username, user_reports=user_reports
+        )
 
     return redirect(url_for("login"))
 
@@ -204,7 +205,7 @@ def add_report():
             "is_serious": is_serious,
             "report_fbo": report_fbo,
             "report_date": request.form.get("report_date"),
-            "reported_by": session["user"]
+            "reported_by": session["user"],
         }
         mongo.db.reports.insert_one(report)
         flash("Report Successfully Submitted")
@@ -237,7 +238,7 @@ def edit_report(report_id):
             "is_serious": is_serious,
             "report_fbo": report_fbo,
             "report_date": request.form.get("report_date"),
-            "reported_by": session["user"]
+            "reported_by": session["user"],
         }
         mongo.db.reports.update_one(
             {"_id": ObjectId(report_id)}, {"$set": submit})
@@ -317,9 +318,7 @@ def add_category():
         return redirect("get_reports")
 
     if request.method == "POST":
-        category = {
-            "category_name": request.form.get("category_name")
-        }
+        category = {"category_name": request.form.get("category_name")}
         mongo.db.categories.insert_one(category)
         flash("New Category Added")
         return redirect(url_for("get_categories"))
@@ -341,9 +340,7 @@ def edit_category(category_id):
         return redirect("get_reports")
 
     if request.method == "POST":
-        submit = {
-            "category_name": request.form.get("category_name")
-        }
+        submit = {"category_name": request.form.get("category_name")}
         mongo.db.categories.update_one(
             {"_id": ObjectId(category_id)}, {"$set": submit})
         flash("Category Updated Successfully")
@@ -437,5 +434,5 @@ if __name__ == "__main__":
     app.run(
         host=os.environ.get("IP"),
         port=int(os.environ.get("PORT")),
-        debug=bool(os.environ.get("DEBUG"))
-        )
+        debug=bool(os.environ.get("DEBUG")),
+    )
