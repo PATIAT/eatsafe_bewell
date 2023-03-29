@@ -17,6 +17,7 @@
     type="text/css">
   <!-- Fontawesome -->
   <script src="https://kit.fontawesome.com/12ef280c55.js" crossorigin="anonymous"></script>
+  <!-- Custom stylesheet -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
   {% block styles %}
   {% endblock %}
@@ -31,7 +32,7 @@
         <div class="nav-wrapper">
           <a href="{{ url_for('get_reports') }}" class="brand-logo">ESBW <i
               class="fa-solid fa-utensils hide-on-small-only"></i></a>
-          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
+          <a href="{{ url_for('get_reports') }}" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
           <ul class="right hide-on-med-and-down">
             <li><a href="{{ url_for('get_reports') }}">Home</a></li>
             <li><a href="{{ url_for('about') }}">About</a></li>
