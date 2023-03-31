@@ -354,7 +354,9 @@ I also personally tested the website on iPhone 11, iPhone 13 Pro, iPhone SE 2022
 - The buttons have been tested and have been verified as working correctly and as expected.
 - If the user has no reports on their account, a message appears to tell them there is nothing to display. This is the expected behaviour.
 - The page only displays the logged in user's reports and not those of other user's.
-- I have tested to try and acccess this page as a user that is not admin, I was redirected to this page still as the admin user with the admin user's reports present.
+- I have tested to try and acccess this page as a user that is not logged in and I was presented with a flash message and redirected to the login page as expected.
+
+<h2 align="left"><img src="static/testing/images/testing-dashboard-login-redirect.png" width="800"></h2>
 
 ## Submit / Edit Report Pages
 
@@ -363,12 +365,14 @@ I also personally tested the website on iPhone 11, iPhone 13 Pro, iPhone SE 2022
 
 - The form input fields on both forms, including validation have been tested and have been verified as working correctly and as expected.
 - The buttons on both forms have been tested and have been verified as working correctly and as expected.
+- Access to these pages is restricted to users who are logged in, this was tested and I was presented with a flash message and redirected to the login screen.
 
 ## Delete Report Page
 
 <h2 align="left"><img src="static/testing/images/testing-delete-report.png" width="800"></h2>
 
 - The buttons have been tested and have been verified as working correctly and as expected.
+- I have attempted to access a delete report page logged in as a user different from the user who reported the issue and I was presented with a flash message and redirected to the login page as expected.
 
 ## Manage Categories Page 
 
@@ -383,10 +387,11 @@ I also personally tested the website on iPhone 11, iPhone 13 Pro, iPhone SE 2022
 <h2 align="left"><img src="static/testing/images/testing-edit-category.png" width="800"></h2>
 
 - The buttons have been tested and have been verified as working correctly and as expected.
+- I attempted to access these pages as a non-admin user and was not allowed access. Instead a flash message appeared telling me I needed admin priviliges.
 
 ## Delete Category Page
 
-<h2 align="left"><img src="static/testing/images/testing-delete-category.png" width="800"></h2>>
+<h2 align="left"><img src="static/testing/images/testing-delete-category.png" width="800"></h2>
 
 - The buttons have been tested and have been verified as working correctly and as expected.
 
@@ -398,42 +403,47 @@ I also personally tested the website on iPhone 11, iPhone 13 Pro, iPhone SE 2022
 
 - In the final stages of the project, I submitted the site for Peer Review by fellow students and alumni at Code Institute via Slack.
 
-- Comment 1
-- Comment 2
-- Comment 3
+- Comments were left by fellow students that stated the website looked good, the readme looked good and that they had noticed some accessibility issues with colour contrast tool Wave whereby some of the white text on green background was not at the required contrast ratio. As mentioned above, in future projects I intend to use lighthouse and other tools such as wave throughout the development process. This is so it is not as onerous to make changes if issues like this exist.
 
 # Bugs
 
 ## Resolved
 
-- Issue: base.html - brand logo <i> overlapping text on small screens.
-- Fix: added code to remove <i> on smaller screens only using MCSS.
+- Issue: 
+    - base.html - brand logo <i> overlapping text on small screens.
+- Fix: 
+    - added code to remove <i> on smaller screens only using MCSS.
 
-- Issue: run.py - function only showed the users username and no other info on page as per CI project.
-- Fix: updated dashboard() function to look up session user's reports so they can be displayed to their own dashboard.
+- Issue: 
+    - run.py - function only showed the users username and no other info on page as per CI project.
+- Fix: 
+    - updated dashboard() function to look up session user's reports so they can be displayed to their own dashboard.
 
-- Issue: dashboard.html and reports.html - buttons were overlapping on small screen sizes only.
-- Fix: used the MCSS class btn-flat which resolved the issue.
+- Issue: 
+    - dashboard.html and reports.html - buttons were overlapping on small screen sizes only.
+- Fix: 
+    - used the MCSS class btn-flat which resolved the issue.
 
-- Issue: during the mid-point project call, my Tutor suggested amending the background colour to an off-white to allow the cards to be more visible. 
-- Fix: This was adopted and rather than rgba(255, 255, 255, 1), rgba(217, 214, 210, 0.35) was used.
+- Issue: 
+    - during the mid-point project call, my Tutor suggested amending the background colour to an off-white to allow the cards to be more visible. 
+- Fix: 
+    - This was adopted and rather than rgba(255, 255, 255, 1), rgba(217, 214, 210, 0.35) was used.
 
-- Issue: When logged out I attempted to access the get_categories page where the admin user only should be allowed to add, edit or delete categories. I was able to access the page while logged out by overwriting the URL.
-- Fix: In run.py, I added an is_admin function which checks whether a user has admin permissions. This was then used to check if a user has admin as their username when trying to access the get_categories page. If they do not, a flash message appears to tell them only admin users can access this section of the website
+- Issue: 
+    - When logged out I attempted to access the get_categories page where the admin user only should be allowed to add, edit or delete categories. I was able to access the page while logged out by overwriting the URL.
+- Fix: 
+    - In run.py, I added an is_admin function which checks whether a user has admin permissions. This was then used to check if a user has admin as their username when trying to access the get_categories page. If they do not, a flash message appears to tell them only admin users can access this section of the website
+
+- Issue:
+    - It was possible to access the add_report page when not logged in but reports cannot be submitted to the database. 
+    - It was possible to access the delete_report page when not logged in provided the report id is available to a logged out user which is unlikely.
+    - It was possible to access the edit_report page when not logged in provided the report id is available to a logged out user which is unlikely. 
+- Fix: 
+    - Updated functions in run.py to check whether users are either logged in and if not, they are redirected to the login page or whether a user is the user that reported the report and if not, they too are either redirected to the login page or reports page.
 
 ## Unresolved
 
-- It is possible to access the add_report page when not logged in but reports cannot be submitted to the database. Further defensive programming is required to prevent this.
-- It is possible to access the edit_report page when not logged in provided the report id is available to a logged out user which is unlikely. Again, further defensive programming is required to prevent this.
-- It is possible to access the delete_report page when not logged in provided the report id is available to a logged out user which is unlikely. Again, further defensive programming is required to prevent this.
 - It is still possible for admin users to add cetegories with identical names.
-
-- *These issues were identified during the testing of the project which was undertaken towards the end. Unfortunaley this was very close to the submission deadline so I have not been able to resolve all issues. In future, I intend to adopt both automated and manual testing and use this throughout the entirety of the development so issues are not left until there is too little time to resolve them.*
-
-<h2 align="left"><img src="" width="800"></h2>
+- When trying to access an edit category page or delete category while not logged in as admin and by pasting the URL with the category id into the search bar, I receive an ERR_TOO_MANY_REDIRECTS error which is usually caused by an infinite loop of redirects. In this case, the cause of the error might be the redirect("get_reports") call inside the first conditional block of the edit_category() function. If the user is not an admin, the function redirects them to the "get_reports". However, if "get_reports" requires admin privileges and the user is not an admin, the function will redirect them again to the "get_reports", creating an infinite loop of redirects. To fix the error, I checked if the user has admin privileges before redirecting them to the "get_reports" (they didn't), and checked if the "get_reports" is accessible to non-admin users (it is). I also tried to redirect the user to a different endpoint and render a different template if they weren't not an admin, to avoid an infinite loop of redirects. None of the above has worked effectively but I beleive that this scenario is unlikely as a user will need to know the category id to be able to replicate these circumstances and without admin access, this is not possible.
 
 Back to [README.md](/README.md#testing)
-
-
-
-
