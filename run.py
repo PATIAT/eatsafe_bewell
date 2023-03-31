@@ -170,6 +170,7 @@ def dashboard(username):
             flash("You are not authorized to access this dashboard.")
             return redirect(url_for("get_reports"))
     else:
+        flash("You must be logged in to access this page.")
         return redirect(url_for("login"))
 
 
