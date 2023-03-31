@@ -30,6 +30,15 @@ def is_admin(username):
 
 
 """
+The get_report_from_id() function finds reports in Mongo DB using report ID.
+"""
+
+
+def get_report_from_id(report_id):
+    return mongo.db.reports.find_one({"_id": ObjectId(report_id)})
+
+
+"""
 The get_reports() function is used to display the reports summary template
 to the user upon visiting the site.
 """
@@ -150,18 +159,18 @@ the database and redirects the user to their own dashboard.
 
 @app.route("/dashboard/<username>", methods=["GET", "POST"])
 def dashboard(username):
-    # retrieving the session user username from the database
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    user_reports = list(
-        mongo.db.reports.find({"reported_by": session["user"]}))
-
-    if session["user"]:
-        return render_template(
-            "dashboard.html", username=username, user_reports=user_reports
-        )
-
-    return redirect(url_for("login"))
+    if "user" in session:
+        if session["user"] == username:
+            user_reports = list(
+                mongo.db.reports.find({"reported_by": session["user"]}))
+            return render_template(
+                "dashboard.html", username=username, user_reports=user_reports
+            )
+        else:
+            flash("You are not authorized to access this dashboard.")
+            return redirect(url_for("get_reports"))
+    else:
+        return redirect(url_for("login"))
 
 
 """
@@ -191,6 +200,11 @@ the database. If GET, the blank form is displayed.
 
 @app.route("/add_report", methods=["GET", "POST"])
 def add_report():
+
+    if "user" not in session:
+        flash("You need to be logged in to access this page!")
+        return redirect(url_for("login"))
+
     if request.method == "POST":
         is_serious = "on" if request.form.get("is_serious") else "off"
         report_fbo = "on" if request.form.get("report_fbo") else "off"
@@ -224,6 +238,12 @@ edit it while displayig the existing data to the user
 
 @app.route("/edit_report/<report_id>", methods=["GET", "POST"])
 def edit_report(report_id):
+    report = get_report_from_id(report_id)
+
+    if "user" not in session or session["user"] != report["reported_by"]:
+        flash("You need to be logged in to access this page!")
+        return redirect(url_for("login"))
+
     if request.method == "POST":
         is_serious = "on" if request.form.get("is_serious") else "off"
         report_fbo = "on" if request.form.get("report_fbo") else "off"
@@ -244,7 +264,6 @@ def edit_report(report_id):
             {"_id": ObjectId(report_id)}, {"$set": submit})
         flash("Report Successfully Edited")
 
-    report = mongo.db.reports.find_one({"_id": ObjectId(report_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template(
         "edit_report.html", report=report, categories=categories)
@@ -260,10 +279,16 @@ get reports page.
 
 @app.route("/delete_report/<report_id>")
 def delete_report(report_id):
-    report = mongo.db.reports.find_one({"_id": ObjectId(report_id)})
+    report = get_report_from_id(report_id)
+
     if not report:
         flash("Report not found")
         return redirect(url_for("get_reports"))
+
+    if "user" not in session or session["user"] != report["reported_by"]:
+        flash("You need to be logged in to access this page!")
+        return redirect(url_for("login"))
+
     return render_template("confirm_delete.html", report_id=report_id)
 
 
@@ -369,6 +394,7 @@ def delete_category(category_id):
     if not category:
         flash("Category not found")
         return redirect(url_for("get_categories"))
+
     return render_template(
         "confirm_delete_category.html", category_id=category_id)
 
