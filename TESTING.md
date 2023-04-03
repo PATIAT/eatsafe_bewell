@@ -405,6 +405,15 @@ I also personally tested the website on iPhone 11, iPhone 13 Pro, iPhone SE 2022
 
 - Comments were left by fellow students that stated the website looked good, the readme looked good and that they had noticed some accessibility issues with colour contrast tool Wave whereby some of the white text on green background was not at the required contrast ratio. As mentioned above, in future projects I intend to use lighthouse and other tools such as wave throughout the development process. This is so it is not as onerous to make changes if issues like this exist.
 
+- Further comments were left by fellow students and included the following:
+    - Overall feedback: Nice idea, as a user it functions very well. Very clear from the moment you enter the site what it is about. I didn't manage to break anything, just a few UX things mentioned that might need to be tweaked. Typing in the the best before date box didn't ruin my UX, I just worry if it breaks something in the backend, which then breaks the site.
+    - The password field has a specific format but the format itself is not communicated to the user.
+        - This issue was fixed by adding a placeholder to the form field.
+    - The best before date field on the add report form is a type="text" rather than type="date" so the data is being sent to the database as a string.
+        - This was left as it was due to the fact that type="text" for a date format like "06 April, 2023" is not supported by the type="date" attribute. The type="date" attribute is designed to accept date values in the ISO format (YYYY-MM-DD). This format was adopted due to its use in the CI Task Manager project.
+    - 404 pages takes you to register and not reports as it suggests on the button on the page.
+        - This issue was fixed by updating the links and text so they matched. So now, for logged in users, it states "Home" and goes to the get_reports page and for logged out users it states "Register" and goes to the register page.
+
 # Bugs
 
 ## Resolved
