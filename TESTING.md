@@ -287,8 +287,6 @@ I also personally tested the website on iPhone 11, iPhone 13 Pro, iPhone SE 2022
 
 ### Buisness Owner
 
-<h2 align="left"><img src="" width="800"></h2>
-
 * As the website owner, I want users to be able to create, edit and delete their own reports, but not those of any other users.
     - This is acheivable for users once they have registered, they have full CRUD functionality.
 
