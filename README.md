@@ -304,7 +304,7 @@
 
 ### Add edit and deletion functionality
 
-- Edit or delete functionality for user accound would improve user experience.
+- Edit or delete functionality for user account would improve user experience.
 
 ### Add comments section
 

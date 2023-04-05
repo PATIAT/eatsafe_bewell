@@ -30,8 +30,16 @@ The Eat Safe Be Well website has been tested using the following methods:
 ### Home Page
 
 <h2 align="left"><img src="static/testing/images/html-validation.png" width="800"></h2>
+<h2 align="left"><img src="static/testing/images/html-validation-about.png" width="800"></h2>
+<h2 align="left"><img src="static/testing/images/html-validation-why-report.png" width="800"></h2>
+<h2 align="left"><img src="static/testing/images/html-validation-login.png" width="800"></h2>
+<h2 align="left"><img src="static/testing/images/html-validation-register.png" width="800"></h2>
+<h2 align="left"><img src="static/testing/images/html-validation-dashboard.png" width="800"></h2>
+<h2 align="left"><img src="static/testing/images/html-add-report.png" width="800"></h2>
+<h2 align="left"><img src="static/testing/images/html-edit-report.png" width="800"></h2>
+<h2 align="left"><img src="static/testing/images/html-delete-report.png" width="800"></h2>
 
-- The Eat Safe Be Well website landing page passed all tests using the [W3C HTML](https://validator.w3.org/) Validator tool
+- The Eat Safe Be Well website passed all tests using the [W3C HTML](https://validator.w3.org/) Validator tool
 
 ## W3C CSS Validator
 
@@ -452,7 +460,7 @@ I also personally tested the website on iPhone 11, iPhone 13 Pro, iPhone SE 2022
 
 ## Unresolved
 
-- It is still possible for admin users to add cetegories with identical names.
+- It is still possible for admin users to add categories with identical names.
 - When trying to access an edit category page or delete category while not logged in as admin and by pasting the URL with the category id into the search bar, I receive an ERR_TOO_MANY_REDIRECTS error which is usually caused by an infinite loop of redirects. In this case, the cause of the error might be the redirect("get_reports") call inside the first conditional block of the edit_category() function. If the user is not an admin, the function redirects them to the "get_reports". However, if "get_reports" requires admin privileges and the user is not an admin, the function will redirect them again to the "get_reports", creating an infinite loop of redirects. To fix the error, I checked if the user has admin privileges before redirecting them to the "get_reports" (they didn't), and checked if the "get_reports" is accessible to non-admin users (it is). I also tried to redirect the user to a different endpoint and render a different template if they weren't not an admin, to avoid an infinite loop of redirects. None of the above has worked effectively but I beleive that this scenario is unlikely as a user will need to know the category id to be able to replicate these circumstances and without admin access, this is not possible.
 - When a category is deleted, the reports associated with that category remain in place. In future, I intend to implement cascade functionality whereby when a category is deleted, all associated reports are deleted. This was simply an oversight during this project.
 
